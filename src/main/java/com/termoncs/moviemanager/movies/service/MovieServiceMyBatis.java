@@ -3,6 +3,7 @@ package com.termoncs.moviemanager.movies.service;
 import com.termoncs.moviemanager.movies.model.Movie;
 import com.termoncs.moviemanager.movies.model.Review;
 import com.termoncs.moviemanager.movies.repository.MovieMyBatisMapper;
+import org.apache.ibatis.jdbc.SQL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

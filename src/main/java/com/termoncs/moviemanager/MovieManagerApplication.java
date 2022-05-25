@@ -18,21 +18,21 @@ public class MovieManagerApplication {
 	}
 
 	/**
+	 *  Wire up implementation of IMovieService required by application
+	 */
+	@Bean
+	@Transactional
+	IMovieService getMovieService() {
+		return new MovieServiceJpa();
+	}
+
+	/**
 	 * Needed since Thymeleaf 3 - configures extension that adds layout support from nz.net.ultraq
 	 * @return LayoutDialect
 	 */
 	@Bean
 	public LayoutDialect layoutDialect() {
 		return new LayoutDialect();
-	}
-
-	@Bean
-	@Transactional
-	/**
-	 *  Wire up implementation of IMovieService required by application
-	 */
-	IMovieService getMovieService() {
-		return new MovieServiceJpa();
 	}
 
 }
