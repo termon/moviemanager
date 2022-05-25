@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://www.w3.org/1999/xhtml" layout:decorate="~{fragments/layout}">
+    <head>
+        <title>Add Movie</title>
+     </head>
+    <body>
+        <div layout:fragment="content" class="mt-4">
+
+            <div th:if="${info}" class="alert alert-primary" role="alert" th:text="${info}"/>
+
+            <div class="card p-4 shadow bg-light">
+                <div class="card-body row">
+
+                    <!-- details -->
+                    <div class="col-8">
+                        <h4 class="card-title">Movie Details</h4>
+                        <dl class="row mt-4">
+                            <dt class="col-sm-4">Name</dt>
+                            <dd class="col-sm-8" th:text="${movie.getName()}"></dd>
+
+                            <dt class="col-sm-4">Director</dt>
+                            <dd class="col-sm-8" th:text="${movie.getDirector()}"></dd>
+
+                            <dt class="col-sm-4">Year</dt>
+                            <dd class="col-sm-8" th:text="${movie.getYear()}"></dd>
+
+                            <dt class="col-sm-4">Budget ($m)</dt>
+                            <dd class="col-sm-8" th:text="${movie.getBudget()}"></dd>
+
+                            <dt class="col-sm-4">Cast</dt>
+                            <dd class="col-sm-8" th:text="${movie.getCast()}">"</dd>
+
+                            <dt class="col-sm-4">Rating</dt>
+                            <dd class="col-sm-8" th:text="${movie.getRating()}"></dd>
+
+                            <dt class="col-sm-4">Plot</dt>
+                            <dd class="col-sm-8" th:text="${movie.getPlot()}"></dd>
+                        </dl>
+                    </div>
+                    <!-- image -->
+                    <div class="col-4">
+                        <img class="img-fluid img-thumbnail" th:src="${movie.getPosterUrl()}" />
+                        <div class="row mt-4 ml-4">
+                        </div>
+                    </div>
+
+                    <!-- buttons -->
+                    <div class="flex mt-4">
+                        <a class="btn btn-sm btn-primary mr-3 "  th:href="@{/movies/edit/__${movie.id}__}">Edit</a>
+                        <a class="btn btn-sm btn-secondary mr-3" th:href="@{/movies/createreview/__${movie.id}__}">Add Review</a>
+                        <a class="btn btn-sm btn-link"           th:href="@{/movies}">Movies</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- reviews -->
+            <div class="row mt-4" th:if="${!movie.reviews.isEmpty()}">
+                <h4 class="">Reviews</h4>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Rating(1-5)</th>
+                        <th scope="col">Comment</th>
+                        <th scope="col">Created</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="review : ${movie.reviews}">
+                        <td th:text="${review.id}"/>
+                        <td th:text="${review.name}"/>
+                        <td th:text="${review.rating}"/>
+                        <td th:text="${review.comment}"/>
+                        <td th:text="${#calendars.format(review.created,'dd MMMM yyyy')}"/>
+                        <td>
+                            <form th:action="@{/movies/reviews/delete}" method="post">
+                                <input id="movie_id" th:name="movie_id" type="hidden" th:value="${movie.id}"/>
+                                <input id="review_id" th:name="review_id" type="hidden" th:value="${review.id}"/>
+                                <button class="btn btn-sm btn-danger" sec:authorize="hasRole('ADMIN')" th:type="submit">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        
+    </body>
+</html>

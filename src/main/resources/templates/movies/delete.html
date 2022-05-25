@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragments/layout}">
+    <head>
+        <title>Add Movie</title>
+     </head>
+    <body>
+        <div layout:fragment="content" class="card shadow mt-4 bg-light p-4">
+            <h3>Delete Movie</h3>
+
+            <div class="row">
+                <dl class="row">
+                    <dt class="col-sm-4">Name</dt>
+                    <dd class="col-sm-8" th:text="${movie.name}"></dd>
+
+                    <dt class="col-sm-4">Director</dt>
+                    <dd class="col-sm-8" th:text="${movie.director}"></dd>
+
+                    <dt class="col-sm-4">Year</dt>
+                    <dd class="col-sm-8" th:text="${movie.year}"></dd>
+
+                    <dt class="col-sm-4">Budget ($m)</dt>
+                    <dd class="col-sm-8" th:text="${movie.budget}"></dd>
+
+                    <dt class="col-sm-4">Duration</dt>
+                    <dd class="col-sm-8" th:text="${movie.duration}"></dd>
+
+                    <dt class="col-sm-4">Plot</dt>
+                    <dd class="col-sm-8" th:text="${movie.plot}"></dd>
+                </dl>
+            </div>
+
+            <div class="row">
+                <form action="#" th:action="@{/movies/delete/__${movie.id}__}" th:object="${movie}" method="post">
+                    <input type="hidden" th:field="*{id}"/>
+                    <button class="btn btn-danger" type="submit">Delete</button>
+                    <a class="btn btn-link" href="/movies">Cancel</a>
+                </form>
+            </div>
+
+        </div>
+        
+    </body>
+</html>

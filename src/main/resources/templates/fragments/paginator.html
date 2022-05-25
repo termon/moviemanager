@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.w3.org/1999/xhtml">
+<body>
+
+<!-- pages contains pagination info -->
+<nav th:if="${pages.TotalPages>0}" aria-label="navigation" th:fragment="paginator">
+
+  <span th:text="|Page ${pages.Number+1} of  ${pages.totalPages} |" />
+  <ul class="pagination">
+    <li class="page-item">
+      <a th:classappend="${!(pages.Number > 0)}? 'disabled'" class="page-link" th:href="@{/movies(page=0,size=${pages.Size})}">First</a>
+    </li>
+
+    <li class="page-item">
+      <a th:classappend="${!(pages.Number > 0)}? 'disabled'" class="page-link" th:href="@{/movies(page=${pages.Number}-1,size=${pages.Size})}">Previous</a>
+    </li>
+
+    <li class="page-item">
+      <a th:classappend="${!(pages.Number < pages.TotalPages-1)}? 'disabled'" class="page-link" th:href="@{/movies(page=${pages.Number}+1,size=${pages.Size})}">Next</a>
+    </li>
+
+    <li class="page-item">
+      <a th:classappend="${!(pages.Number < pages.TotalPages-1)}? 'disabled'" class="page-link" th:href="@{/movies(page=${pages.totalPages-1}, size=${pages.Size})}">Last</a>
+    </li>
+  </ul>
+</nav>
+
+</body>
+</html>

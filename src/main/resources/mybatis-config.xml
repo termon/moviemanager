@@ -1,0 +1,3 @@
+<typeHandlers>
+    <typeHandler handler="org.apache.ibatis.type.EnumOrdinalTypeHandler" javaType="com.termoncs.moviemanager.movies.model.Genre"/>
+</typeHandlers>

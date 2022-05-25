@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragments/layout}">
+    <head>
+        <title>Add Review</title>
+     </head>
+    <body>
+        <div layout:fragment="content" class="card shadow mt-4 p-4">
+            <h3>Add Review</h3>
+                      
+            <form action="#" th:action="@{/movies/createreview}" th:object="${review}" method="post">
+
+                <input type="hidden" id="movieId" th:field="*{movieId}" />
+
+                <div class="">
+                   <label for="name" class="form-label">Name</label>
+                   <input class="form-control" id="name" type="text" th:field="*{name}" />
+                   <span class="text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"/>
+                </div>
+
+                <div class="mt-3">
+                    <label for="rating" class="form-label">Rating</label>
+                    <input class="form-control" id="rating" type="number"  th:field="*{rating}" />
+                    <span class="text-danger" th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"/>
+                </div>
+
+                <div class="mt-3">
+                    <label for="comment" class="form-label">Plot</label>
+                    <textarea class="form-control" id="comment" th:rows="4" th:field="*{comment}" />
+                    <span class="text-danger" th:if="${#fields.hasErrors('comment')}" th:errors="*{comment}"/>
+                </div>
+
+                <div class="mt-3">
+                    <button class="btn btn-primary" type="submit">Add</button>
+                    <a th:href="@{/movies/__${review.movieId}__}">Cancel</a>
+                </div>
+
+            </form>
+            
+        </div>
+        
+    </body>
+</html>
+

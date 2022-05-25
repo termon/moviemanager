@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html   lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+        xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragments/layout}">
+    <head>
+        <title>Movie List</title>
+     </head>
+    <body>
+        <div layout:fragment="content" class="container">
+            <h3>Movie list</h3>
+
+            <a sec:authorize="hasRole('ADMIN')" class="btn btn-sm btn-primary mt-4 mb-4" href="/movies/create">Add</a>
+
+            <table class="table">
+                <thead>
+                  <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Name</th>
+                      <th scope="col">Director</th>
+                      <th scope="col">Year</th>
+                      <th scope="col">Genre</th>
+                      <th scope="col">Rating</th>
+                      <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="movie : ${pages.Content}">
+                        <td th:text="${movie.id}"/>
+                        <td th:text="${movie.name}"/>
+                        <td th:text="${movie.director}"/>
+                        <td th:text="${movie.year}"/>
+                        <td th:text="${movie.genre}"/>
+                        <td th:text="${movie.rating}"/>
+                        <td>
+                            <a th:href="@{/movies/__${movie.id}__}"><i class="bi bi-list"></i></a>
+                            <a sec:authorize="hasRole('ADMIN')" th:href="@{/movies/edit/__${movie.id}__}"><i class="bi bi-pen"></i></a>
+                            <a sec:authorize="hasRole('ADMIN')" th:href="@{/movies/delete/__${movie.id}__}"><i class="bi bi-trash"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <nav th:replace="~{fragments/paginator :: paginator}"></nav>
+        </div>
+        
+    </body>
+</html>
