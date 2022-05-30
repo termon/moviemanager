@@ -1,21 +1,21 @@
 
 package com.termoncs.moviemanager.auth.controller;
 
+import com.termoncs.moviemanager.auth.config.JwtRequestFilter;
 import com.termoncs.moviemanager.auth.config.JwtUtils;
 import com.termoncs.moviemanager.auth.model.AuthenticationRequest;
 import com.termoncs.moviemanager.auth.model.AuthenticationResponse;
 import com.termoncs.moviemanager.auth.service.AuthUserDetailsService;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -23,9 +23,12 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author aiden
  */
-@RestController
+
+// @RestController
+@Controller
 public class UserController {
-    
+    org.slf4j.Logger logger = LoggerFactory.getLogger(UserController.class);
+
     @Autowired
     private AuthenticationManager authManager;
     
@@ -79,9 +82,9 @@ public class UserController {
             return ResponseEntity.badRequest().body("Invalid credentials");
            //throw new Exception("Invalid user credentials", e);
         }
-        
+
         final UserDetails details = userService.loadUserByUsername(req.getUsername());
-        
+
         final String jwt = jwtTokenUtil.generateToken(details);
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }

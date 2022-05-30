@@ -1,0 +1,21 @@
+
+<!DOCTYPE html>
+<html   xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{fragments/layout}">
+<head>
+  <title>Home</title>
+</head>
+<body>
+<div layout:fragment="content" class="container mt-4">
+
+  <div class="jumbotron">
+    <h1 class="display-4">The Movie Manager</h1>
+    <p class="lead">This application was built using SpringBoot</p>
+    <hr class="my-4">
+    <p>It can be configured to use SpringJpa, MyBatis, SpringJdbc or an InMemory service as the persistence layer and Thymeleaf for the view layer</p>
+    <a class="btn btn-primary btn-sm" href="/movies" role="button">View Movies</a>
+  </div>
+</div>
+
+</body>
+</html>

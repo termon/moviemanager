@@ -53,8 +53,8 @@ public class Movie {
     @Column(columnDefinition = "TEXT")
     private String plot;
 
-    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)
-   //@JsonIgnore
+    //@JsonIgnore
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     public List<Review> reviews;
 
     public Movie() {

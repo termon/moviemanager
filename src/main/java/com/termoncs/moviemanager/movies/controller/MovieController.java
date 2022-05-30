@@ -119,7 +119,7 @@ public class MovieController {
     }
 
     /**
-     * Rather rather than creating AuthenticationFacade and injecting where required, we could just use the fact that
+     * Rather than creating AuthenticationFacade and injecting where required, we could just use the fact that
      * controller actions can use the Http request to access to the Security principal by adding
      * HttpServletRequest req as method parameter, then access user via req.getUserPrincipal()
      */

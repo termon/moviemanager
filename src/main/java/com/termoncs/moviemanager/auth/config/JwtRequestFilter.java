@@ -1,6 +1,7 @@
 
 package com.termoncs.moviemanager.auth.config;
 
+import com.termoncs.moviemanager.auth.controller.UserController;
 import com.termoncs.moviemanager.auth.service.AuthUserDetailsService;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +51,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 
                 authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(req));
                 SecurityContextHolder.getContext().setAuthentication(authToken);
+                logger.info("================ setting token");
             }
         }
         // pass on to the next filter

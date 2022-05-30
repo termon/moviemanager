@@ -30,9 +30,11 @@ public class AuthUserDetailsService implements UserDetailsService {
         return new MovieUserDetails(user.getUsername(), user.getPassword(), Arrays.asList(user.getRole()));
     }
 
-    // Unsure if its ok to extend the UserDetailsService in this way, but works fine
+    // Unsure if ok to extend the UserDetailsService in this way, but works fine
     // adding a user using the underlying user repository
     public void addUser(MovieUser u) {
+        // When using DelegatingPasswordEncoder and plaintext passwords required - prefix with {noop}
+        //u.setPassword("{noop}"+u.getPassword());
         repository.save(u);
     }
 
